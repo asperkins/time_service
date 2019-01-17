@@ -1,0 +1,16 @@
+apiVersion: build.knative.dev/v1alpha1
+kind: Build
+metadata:
+  name: time-service-build
+  source:
+    git:
+      url: https://github.com/asperkins/time_service.git
+      revision: master
+ 
+spec:
+  steps:
+    - name: build
+      image: gcr.io/$(PROJECT_ID)/time-service:1.0
+      args:
+      - --dockerfile=/code/Dockerfile
+      - --destination=gcr.io/[PROJECT-NAME]/hello-nginx
